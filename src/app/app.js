@@ -1,7 +1,7 @@
 import React from "react";
 // import React, {Component} from "react";
 import CurrentUser from "./services/get-current-user.service";
-import DealList from "./services/crm-deal-list.service2";
+import DealList from "./services/crm-deal-list.service3";
 
 
 /*class App extends Component {
