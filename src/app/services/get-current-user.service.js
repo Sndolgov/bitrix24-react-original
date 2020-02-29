@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import Loading from "../common/Loading";
-// import '../../css/application.css'
+import Spinner from "../common/Spinner";
 
 
 class CurrentUser extends Component {
@@ -37,7 +36,7 @@ class CurrentUser extends Component {
             );
         } else {
             return (
-                <Loading text={'Current user'}/>
+                <Spinner/>
             )
         }
     }

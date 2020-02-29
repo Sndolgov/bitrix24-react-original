@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import MyError from "../common/MyError";
 import Loading from "../common/Loading";
+import Spinner from "../common/Spinner";
 
 class DealList extends Component {
 
@@ -23,7 +24,15 @@ class DealList extends Component {
                     <td>{TITLE}</td>
                     <td>{OPPORTUNITY}</td>
                 </tr>
+
             )
+        })
+    };
+
+    renderTableHeader() {
+        let header = Object.keys(this.state.deals[0])
+        return header.map((key, index) => {
+            return <th key={index}>{key.toUpperCase()}</th>
         })
     }
 
@@ -45,7 +54,10 @@ class DealList extends Component {
                             console.log(this.state.error.ex.error_description)
                         } else {
                             var data = res.data();
+                            console.log(data);
                             this.setState({loading: false, deals: data});
+                            if (res.more())
+                                res.next();
 
                             /*       for (let i = 0; i < data.length; i++) {
                                        console.log('OPPORTUNITY', parseFloat(data[i].OPPORTUNITY));
@@ -89,52 +101,59 @@ class DealList extends Component {
                 )
             } else {
                 return (
-                    <div>
-                        <h1 id='title'>React Dynamic Table</h1>
-                        <table id='students'>
-                            <tbody>
-                            {this.renderTableData()}
-                            </tbody>
-                        </table>
-                    </div>
-                )
-       /*         <div id="app" className="container-fluid">
-                    <div className="bs-callout bs-callout-danger">
-                        <h4>Получение списочных данных</h4>
-                        <p>Текущий пользователь: <span id="user-name"><i className="fa fa-spinner fa-spin"></i></span>
-                        </p>
-                    </div>
                     <div className="row">
                         <div className="col-md-8 col-sm-6">
-                            <div className="panel panel-default">
+                            <div className="card">
                                 <table className="table table-responsive">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Название</th>
-                                        <th>Сумма</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="deal-list">
-                                    <tr>
-                                        <td colSpan="3"><i className="fa fa-spinner fa-spin"></i></td>
-                                    </tr>
+                                    <tbody>
+                                    <tr>{this.renderTableHeader()}</tr>
+                                    {this.renderTableData()}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div className="col-md-4 col-sm-6">
-                            <div className="panel panel-success">
-                                <div id="deal-sum" className="panel-body text-right">
-                                    <i className="fa fa-spinner fa-spin"></i>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>*/
+                )
+                /*         <div id="app" className="container-fluid">
+                             <div className="bs-callout bs-callout-danger">
+                                 <h4>Получение списочных данных</h4>
+                                 <p>Текущий пользователь: <span id="user-name"><i className="fa fa-spinner fa-spin"></i></span>
+                                 </p>
+                             </div>
+                             <div className="row">
+                                 <div className="col-md-8 col-sm-6">
+                                     <div className="panel panel-default">
+                                         <table className="table table-responsive">
+                                             <thead>
+                                             <tr>
+                                                 <th>#</th>
+                                                 <th>Название</th>
+                                                 <th>Сумма</th>
+                                             </tr>
+                                             </thead>
+                                             <tbody id="deal-list">
+                                             <tr>
+                                                 <td colSpan="3"><i className="fa fa-spinner fa-spin"></i></td>
+                                             </tr>
+                                             </tbody>
+                                         </table>
+                                     </div>
+                                 </div>
+                                 <div className="col-md-4 col-sm-6">
+                                     <div className="panel panel-success">
+                                         <div id="deal-sum" className="panel-body text-right">
+                                             <i className="fa fa-spinner fa-spin"></i>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>*/
             }
         } else return (
-            <Loading text={'Deal list'}/>
+            <>
+                <Loading text={'Deal list'}/>
+                <Spinner/>
+            </>
         )
     }
 }
