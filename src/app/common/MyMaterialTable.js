@@ -46,16 +46,6 @@ const renderTableHeader = (headers) => {
     return result;
 };
 
-const  renderTableData = (data) => {
-    return data.map((d, index) => {
-        return (
-            <StyledTableRow key={index}>
-                {renderCell(d, index)}
-            </StyledTableRow>
-        )
-    })
-};
-
 export default function MyMaterialTable(props) {
     return (
         <div style={{ maxWidth: "100%" }}>
