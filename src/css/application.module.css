@@ -46,7 +46,9 @@
     list-style-type:none;
 }
 
-.user-row{
+.delete-user-button{
     padding-bottom: 10px;
+    borderRadius: 30px;
+    marginRight: 10px;
 }
 

@@ -52,7 +52,7 @@ class UserList extends Component {
                         <div className="ripple-wrapper"></div>
                     </a>
                 </div >
-                <ul className="list-group" style={{marginTop: 20}}>
+                <ul className="list-group" style={{marginTop: 20, hight: '100%', overflow: 'auto'}}>
                     <li className="list-group-item">User:</li>
                     {this.showUserList()}
                 </ul>
