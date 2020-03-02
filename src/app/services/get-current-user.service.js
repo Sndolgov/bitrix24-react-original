@@ -31,6 +31,7 @@ class CurrentUser extends Component {
         if (!this.state.loading) {
             return (
                 <div className="bs-callout bs-callout-danger">
+                    <h4>Receipt of payroll data</h4>
                     <p>Current user: <span><i className="fa fa-spinner fa-spin">{this.state.user.LAST_NAME} {this.state.user.NAME}</i></span></p>
                 </div>
             );

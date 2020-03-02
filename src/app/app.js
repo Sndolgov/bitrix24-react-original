@@ -1,7 +1,8 @@
 import React from "react";
 // import React, {Component} from "react";
 import CurrentUser from "./services/get-current-user.service";
-import DealList from "./services/crm-deal-list.service3";
+import DealList from "./services/crm-deal-list.service";
+import UserList from "./services/handler-user-list-service";
 
 
 /*class App extends Component {
@@ -18,11 +19,6 @@ export default App;*/
 export default (props) => {
     return (
         <div className="container-fluid">
-            <div className="bs-callout bs-callout-danger">
-                <h4>Receipt of payroll data</h4>
-                <CurrentUser/>
-                <hr/>
-                <DealList/>
-            </div>
+                <UserList/>
         </div>)
 }

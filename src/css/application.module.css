@@ -1,0 +1,52 @@
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout-danger {
+    border-left-color: #ce4844;
+}
+
+.bs-callout-danger h4 {
+    color: #ce4844;
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.volume {
+    font-size: 24px;
+}
+
+.material-table{
+    max-width: 100%;
+    display: inline-block;
+    flex: 2 1 auto;
+}
+
+.amount {
+    display: inline-block;
+    margin-left: 10px;
+    height: fit-content;
+    padding-left: 70px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border: 1px solid #aaa;
+    text-align: right;
+}
+
+.user-list{
+    margin-top: 20px;
+    list-style-type:none;
+}
+
+.user-row{
+    padding-bottom: 10px;
+}
+

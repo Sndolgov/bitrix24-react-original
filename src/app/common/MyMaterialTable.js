@@ -48,7 +48,7 @@ const renderTableHeader = (headers) => {
 
 export default function MyMaterialTable(props) {
     return (
-        <div style={{ maxWidth: "100%" }}>
+        <div className='material-table'>
             <MaterialTable
                 icons={tableIcons}
                 columns={renderTableHeader(props.headers)}
