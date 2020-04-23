@@ -1,9 +1,16 @@
 import React, {Component} from "react";
-import MyError from "../common/MyError";
-import Loading from "../common/Loading";
-import Spinner from "../common/Spinner";
-
-import MyMaterialTable from "../common/MyMaterialTable";
+import MyError from "../../component/error/MyError";
+import Loading from "../../component/loading/Loading";
+import Spinner from "../../component/loading/Spinner";
+import Table from '@material-ui/core/Table';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import Paper from '@material-ui/core/Paper';
+// import {makeStyles, withStyles} from '@material-ui/core/styles';
+import TableBody from "@material-ui/core/TableBody";
+import MyTable from "../../component/table/MyTable";
 
 
 class DealList extends Component {
@@ -16,6 +23,31 @@ class DealList extends Component {
             deals: [],
         };
         this.getDealList(1);
+    }
+
+    renderTableData() {
+        return this.state.deals.map((deal, index) => {
+            return (
+                <TableRow key={index}>
+                    <TableCell component="th" scope="row">
+                        {deal.ID}
+                    </TableCell>
+                    <TableCell align="left">{deal.TITLE}</TableCell>
+                    <TableCell align="left">{deal.OPPORTUNITY}</TableCell>
+                </TableRow>
+            )
+        })
+    };
+
+    renderTableHeader() {
+        let header = Object.keys(this.state.deals[0]);
+        return header.map((key, index) => {
+            if (index === 0)
+                return <TableCell>{key.toUpperCase()}</TableCell>
+            else return (
+                <TableCell align="left">{key.toUpperCase()}</TableCell>
+            )
+        })
     }
 
 
@@ -44,14 +76,6 @@ class DealList extends Component {
         });
     }
 
-    getAmount(){
-        let amount = 0;
-        this.state.deals.map((key, index)=>{
-            amount+=parseInt(key['OPPORTUNITY']);
-        })
-        return amount;
-    }
-
     render() {
 
         if (!this.state.loading) {
@@ -61,13 +85,7 @@ class DealList extends Component {
                 )
             } else {
                 return (
-                    <div style={{display:"flex"}}>
-                        <MyMaterialTable headers={Object.keys(this.state.deals[0])} data={this.state.deals}/>
-                        <div className="amount">
-                            <div>{this.getAmount()}</div>
-                            <div stile={{fontSize: 12}}>amount</div>
-                        </div>
-                    </div>
+                    <MyTable headers={Object.keys(this.state.deals[0])} data= {this.state.deals}/>
                 )
             }
         } else return (

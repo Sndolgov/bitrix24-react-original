@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import MyError from "../../common/MyError";
-import Loading from "../../common/Loading";
-import Spinner from "../../common/Spinner";
+import MyError from "../../component/error/MyError";
+import Loading from "../../component/loading/Loading";
+import Spinner from "../../component/loading/Spinner";
 
 class DealList extends Component {
 

@@ -213,7 +213,7 @@ ReactDOM.render(<App />, rootElement);
 ```javascript
 // app/app.js
 import React, { Component } from "react";
-import getCurrentUser from "./services/get-current-user.service";
+import getCurrentUser from "./page/get-current-user.service";
 
 class App extends Component {
   constructor(props) {
@@ -251,7 +251,7 @@ export default App;
 ```
 
 ```javascript
-// app/services/get-current-user.service.js
+// app/page/PayrollData.js
 import { BX24 } from "bx24";
 import axios from "axios";
 

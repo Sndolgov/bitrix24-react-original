@@ -1,24 +1,22 @@
-import React from "react";
-// import React, {Component} from "react";
-import CurrentUser from "./services/get-current-user.service";
-import DealList from "./services/crm-deal-list.service";
-import UserList from "./services/handler-user-list-service";
+import React, {Component} from "react";
+import UserList from "./page/UserList";
+import {connect} from 'react-redux'
+import {Redirect, Route, Switch} from "react-router-dom";
+import SalesRating from "./page/SalesRating";
+import DealList from "./page/DealList";
 
 
-/*class App extends Component {
+class App extends Component {
 
     render() {
-        return (<>
-            <CurrentUser/>
-        </>)
+        return (
+            <Switch>
+                <Route path='/sales' exact component={SalesRating}/>
+                <Route path='/' exact component={DealList}/>
+                <Redirect to={'/'}/>
+            </Switch>)
     }
 }
 
-export default App;*/
+export default connect()(App);
 
-export default (props) => {
-    return (
-        <div className="container-fluid">
-                <UserList/>
-        </div>)
-}

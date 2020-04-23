@@ -10,8 +10,9 @@ const MyButton = styled(Button)({
     color: 'white',
     height: 48,
     padding: '0 30px',
+    margin: '10px'
 });
 
-export default function StyledComponents() {
-    return <MyButton>Styled Components</MyButton>;
+export default function StyledComponents(props) {
+    return <MyButton onClick={()=> props.onClick()}>{props.label}</MyButton>;
 }
