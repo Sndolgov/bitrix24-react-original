@@ -1,19 +1,28 @@
-import {
-    ADD_ENTITIES,
-    DELETE_USER,
-} from "../actions/actionTypes";
+import {SAVE_ENTITY, UPDATE_ENTITIES, LOADING_STATUS} from "../actions/actionTypes";
 
 const initialState = {
-    entities: {}
+    entities: {},
+    loading: false
 };
 
 export default function userListReducer(state = initialState, action) {
     switch (action.type) {
-        case ADD_ENTITIES:
-
+        case SAVE_ENTITY:
+            let copyEntities = {...state.entities};
+            copyEntities[action.id] = action.entity;
+            return {
+                ...state,
+                entities: copyEntities
+            };
+        case UPDATE_ENTITIES:
             return {
                 ...state,
                 entities: action.entities
+            };
+        case LOADING_STATUS:
+            return {
+                ...state,
+                loading: action.isLoading
             };
 
         default:

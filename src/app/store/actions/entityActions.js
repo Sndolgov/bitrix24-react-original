@@ -1,25 +1,15 @@
-import {ADD_ENTITIES} from "./actionTypes";
+import {LOADING_STATUS, SAVE_ENTITY, UPDATE_ENTITIES} from "./actionTypes";
 
 export function getEntities(entityName, sort) {
-    return (dispatch) => {
+    return () => {
         return new Promise((resolve) => {
             try {
                 BX24.callMethod('entity.item.get', {
                         ENTITY: entityName,
                         SORT: sort//{DATE_ACTIVE_FROM: 'ASC'}
                     },
-
                     (result) => {
-                        let entities = {};
-                        const data = result.data();
-                        data.map((entity) => {
-                            entities[entity.PROPERTY_VALUES.ID_USER] = entity;
-                        });
-                        dispatch({
-                            type: ADD_ENTITIES,
-                            entities
-                        });
-                        resolve(entities)
+                        resolve(result)
                     })
             } catch (e) {
                 console.log(e)
@@ -28,17 +18,18 @@ export function getEntities(entityName, sort) {
     }
 }
 
-export function getEntityByParameter(parameter, values) {
+export function getUserByParameter(parameterWithValues) {
     return () => {
         return new Promise((resolve) => {
             try {
                 BX24.callMethod(
-                    'entity.item.get',
-                    {parameter: values}
-                    ,
+                    'user.get',
+                    parameterWithValues,
                     (result) => {
-
-                        resolve(result)
+                        if (result.more())
+                            result.next();
+                        else
+                            resolve(result)
                     })
             } catch (e) {
                 console.log(e)
@@ -57,8 +48,15 @@ export function getDealList(order, filter, select) {
                         order,
                         filter,
                         select
+                        // order: { "ASSIGNED_BY_ID": "ASC", "DATE_CREATE": "ASC" },
+                        // filter: null,
+                        // select: [ "ID", "TITLE", "OPPORTUNITY", "ASSIGNED_BY_ID"]
                     },
-                    (result) => resolve(result))
+                    (result) => {
+                        if (result.more())
+                            result.next();
+                        else
+                            resolve(result)                    })
             } catch (e) {
                 console.log(e)
             }
@@ -66,12 +64,12 @@ export function getDealList(order, filter, select) {
     }
 }
 
-export function deleteEntityById(entity, id) {
+export function deleteEntityById(entityName, id) {
     return () => {
         return new Promise((resolve, reject) => {
             try {
                 BX24.callMethod('entity.item.delete', {
-                        ENTITY: entity,
+                        ENTITY: entityName,
                         ID: id
                     }, (result) => resolve(result)
                 )
@@ -79,5 +77,27 @@ export function deleteEntityById(entity, id) {
                 console.log(err);
             }
         });
+    }
+}
+
+export function saveEntity(id, entity) {
+    return {
+        type: SAVE_ENTITY,
+        id,
+        entity
+    }
+}
+
+export function updateEntity(entities) {
+    return {
+        type: UPDATE_ENTITIES,
+        entities
+    }
+}
+
+export function loadingStatus(isLoading){
+    return{
+        type: LOADING_STATUS,
+        isLoading
     }
 }
