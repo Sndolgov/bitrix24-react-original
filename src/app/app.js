@@ -12,7 +12,7 @@ class App extends Component {
         return (
             <Switch>
                 <Route path='/sales' exact component={SalesRating}/>
-                <Route path='/' exact component={DealList}/>
+                <Route path='/' exact component={SalesRating}/>
                 <Redirect to={'/'}/>
             </Switch>)
     }

@@ -9,7 +9,6 @@ import {
 } from "../store/actions/entityActions";
 import {connect} from "react-redux";
 import UserWithDeals from "../component/user/UserWithDeals";
-import Loading from "../component/loading/Loading";
 
 class DealList extends Component {
 
@@ -77,7 +76,7 @@ class DealList extends Component {
     addUsersRows() {
         return Object.keys(this.props.entities).map((id) => {
             return (
-                <UserWithDeals user={this.props.entities[id]} key = {id}/>
+                <UserWithDeals user={this.props.entities[id]} key={id}/>
             )
         })
     }
@@ -93,26 +92,26 @@ class DealList extends Component {
                 </div>
                 <div className="row">
                     <div className="col-md-5 col-sm-6">
-                        <div className="panel panel-success">
-                            <div className="panel-heading">
-                                <h3 className="panel-title">Участники рейтинга</h3>
+                        <div className="card text-white bg-success">
+                            <div className="card-header">
+                                <h3 className="card-title">Участники рейтинга</h3>
                             </div>
-                            <div className="panel-body">
+                            <div className="card-body" style={{padding: 0}}>
                                 <div className="list-group"/>
                                 {!this.props.loading && Object.keys(this.props.entities).length > 0
                                     ? this.addUsersRows()
-                                    :<i className="fa fa-spinner fa-spin"/>}                            </div>
+                                    : <i className="fa fa-spinner fa-spin"/>}                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="col-md-5 col-sm-6">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">
-                            <h3 className="panel-title">Мой результат</h3>
-                        </div>
-                        <div className="panel-body">
-                            <div className="list-group"/>
-                            <i className="fa fa-spinner fa-spin"/>
+                    <div className="col-md-5 col-sm-6">
+                        <div className="card">
+                            <div className="card-header">
+                                <h3 className="card-title">Мой результат</h3>
+                            </div>
+                            <div className="card-body">
+                                <div className="list-group"/>
+                                <i className="fa fa-spinner fa-spin"/>
+                            </div>
                         </div>
                     </div>
                 </div>
